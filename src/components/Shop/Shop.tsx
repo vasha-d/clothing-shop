@@ -1,13 +1,12 @@
 import { Outlet } from "react-router-dom"
-import Navbar from "./Navbar"
 import CartPanel from "./CartPanel/CartPanel"
+import { getItem, getPage } from "./api/products"
+import { deleteCartProduct, getCart, patchCartProduct, postCartItem, postCheckOut } from "./api/cart"
 function Shop() {
-
-
-
+  if (!localStorage.getItem('token')) return
+  
   return (
     <>
-      <Navbar></Navbar>
       <Outlet></Outlet>
       <CartPanel></CartPanel>
     </>

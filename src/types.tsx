@@ -10,3 +10,10 @@ export type SignInObjType = {
   email: string,
   password: string
 }
+
+export type ProductObjType = {
+  color: string,
+  id: number,
+  size: string,
+  
+}

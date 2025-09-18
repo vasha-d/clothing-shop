@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styles from './auth.module.css'
 import type { SignInObjType } from '../../types'
 import { postSignIn} from './api'
+import { Navigate, useNavigate } from 'react-router-dom'
 const defaultDataState = {
   email: '',
   password: '',
@@ -10,7 +11,7 @@ const defaultDataState = {
 function SignIn() {
 
   const [dataObj, setDataObj] = useState<SignInObjType>(defaultDataState)
-
+  const navigate = useNavigate()
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     
     console.log(e.target.id)
@@ -27,6 +28,11 @@ function SignIn() {
     const token = req.data.token
     localStorage.setItem('token', token)
     console.log(localStorage.getItem('token'))
+    // document.cookie = `token=${token}; Secure; SameSite=Lax`
+    //If Sign In successful, go to shop page
+    if (req.status == 200) {
+      navigate('/shop')
+    }
   }
   return (
     <div>
