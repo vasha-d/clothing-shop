@@ -29,8 +29,8 @@ function Parameters({query, setQuery}: ParamPropsType) {
         submitPrice={submitPrice}
       ></Price>
       <Sort 
-        query={query}
-        submitFilter={submitSort}
+        sort={query.sort}
+        submitSort={submitSort}
       ></Sort>
     </div>
   )

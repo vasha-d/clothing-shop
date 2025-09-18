@@ -37,8 +37,7 @@ export type PageFetchReturnType = {
 }
 
 
-export type SortType = 
+export type SortType =
  `price` |
  `-price` |
- `created_at` |
- `-created_at`
+ `created_at` 

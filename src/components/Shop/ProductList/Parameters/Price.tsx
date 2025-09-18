@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import styles from './Parameters.module.css'
 
 type PricePropsType = {
   min: number,
