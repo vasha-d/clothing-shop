@@ -1,0 +1,9 @@
+.card {
+  display: block;
+  border: 1px solid green;
+}
+
+
+.prodImg > img {
+  height: 150px;
+}

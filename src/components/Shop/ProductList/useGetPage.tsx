@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { getPage } from "../api/products";
-import type { SortType } from "../../../types";
+import type { PageFetchReturnType, ProductListQueryType } from "../../../types";
 
-type ProductListQueryType = {
-  page: number,
-  min: number,
-  max: number,
-  sort: SortType
-}
 const defaultQuery: ProductListQueryType = {
   page: 1,
   min: 0,
@@ -17,7 +11,7 @@ const defaultQuery: ProductListQueryType = {
 export default function useGetPage() {
 
   const [query, setQuery] = useState(defaultQuery)
-  const [data, setData] = useState({})
+  const [data, setData] = useState<PageFetchReturnType | null>(null)
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     
@@ -26,13 +20,12 @@ export default function useGetPage() {
         query.page, query.min, query.max, query.sort
       )
       const data = req.data
-      console.log(req, data)
-      setData(req.data)
+      setData(data)
       setLoading(false)
     }
     fetchProducts()
   }, [query.page, query.min, query.max, query.sort])
 
-
+  console.log(query)
   return {data, setQuery, query, loading}
 }

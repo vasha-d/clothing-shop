@@ -12,17 +12,14 @@ export async function getPage( page: number, min: number, max: number, sort: str
     sort: sort
   })
   
-  console.log(params.toString())
   const url = api + '?' + params.toString()
 
-  console.log(url)
   const query = await axios.get(url, {
     headers: {
       'Accept': 'application/json'
     }
   })
 
-  console.log(query)
   return query
 }
 
@@ -34,10 +31,7 @@ export async function getItem(id: number) {
       Accept: 'applicatin/json'
     }
   })
-  console.log(request
     
-  )
-  console.log(request.data)
   return request
 }
 
