@@ -17,3 +17,10 @@ export type ProductObjType = {
   size: string,
   
 }
+
+
+export type SortType = 
+ `price` |
+ `-price` |
+ `created_at` |
+ `-created_at`

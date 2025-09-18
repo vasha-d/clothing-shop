@@ -23,6 +23,7 @@ export async function getPage( page: number, min: number, max: number, sort: str
   })
 
   console.log(query)
+  return query
 }
 
 export async function getItem(id: number) {
