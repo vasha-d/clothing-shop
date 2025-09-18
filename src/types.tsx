@@ -5,3 +5,8 @@ export type RegistrationObjType = {
   password_confirmation: string,
   avatar: File | null,
 }
+
+export type SignInObjType = {
+  email: string,
+  password: string
+}

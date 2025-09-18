@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './auth.module.css'
 import type { RegistrationObjType } from '../../types'
-import { postAccount } from './api'
+import { postNewAccount } from './api'
 const defaultDataState = {
   username: '',
   email: '',
@@ -36,12 +36,12 @@ function Register() {
   }
   async function submitForm (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
-    const req = await postAccount(dataObj)
+    const req = await postNewAccount(dataObj)
     console.log(req)
 
   }
   return (
-    <div>Register
+    <div>
       <div className={styles.formContainer}>
           <form>
             <div className={styles.imgForm}>
@@ -62,7 +62,7 @@ function Register() {
             <button onClick={submitForm}>Register</button>
           </form>
       </div>
-
+      <a href="/sign-in">Or Sign IN</a>
     </div>
   )
 }
