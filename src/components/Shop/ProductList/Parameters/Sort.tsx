@@ -1,12 +1,8 @@
 import { useState } from "react"
 import type { SortType } from "../../../../types"
 import styles from './Parameters.module.css'
-type SortPropsType = {
-  sort: SortType
-  submitSort: (newVal: SortType) => void
-}
-
-
+import type { SortFilterPropsType } from "./types"
+//Applies '.selected' class to whichever option is selected
 function getClass(id: SortType, sortVal: SortType) {
   let className = ''
   if (sortVal == id) {
@@ -16,10 +12,18 @@ function getClass(id: SortType, sortVal: SortType) {
   return className
 }
 
-function Sort({sort, submitSort}: SortPropsType) {
+function Sort({sort, submitSort, visible}: SortFilterPropsType) {
 
   const [newSort, setNewSort] = useState<SortType>(sort)
-
+  if (visible !== 'sort') {
+    clearUnsubmittedInputs()
+    return null
+  }
+  function clearUnsubmittedInputs () {
+    if (newSort != sort) {
+      setNewSort(sort)
+    }
+  }
   function changeSort (e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const target = e.target as HTMLDivElement
     const newSortVal = target.id as SortType 
@@ -30,11 +34,10 @@ function Sort({sort, submitSort}: SortPropsType) {
   function applySort() {
     submitSort(newSort)
   }
+  console.log(sort, newSort)
   return (
     <div>
-      
-
-      <h4>Sort By</h4>
+    
       <div>
         <div
           onClick={changeSort}

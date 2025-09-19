@@ -5,7 +5,7 @@ import type { PageFetchReturnType, ProductListQueryType } from "../../../types";
 const defaultQuery: ProductListQueryType = {
   page: 1,
   min: 0,
-  max: 1000,
+  max: '',
   sort: 'created_at'
 }
 export default function useGetPage() {

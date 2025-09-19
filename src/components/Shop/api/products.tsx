@@ -3,7 +3,7 @@ import axios from "axios"
 
 const api = 'https://api.redseam.redberryinternship.ge/api/products'
 
-export async function getPage( page: number, min: number, max: number, sort: string ) {
+export async function getPage( page: number, min: number | '', max: number | '', sort: string ) {
   
   const params = new URLSearchParams({
     page: page.toString(),

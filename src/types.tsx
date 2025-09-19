@@ -12,8 +12,8 @@ export type SignInObjType = {
 }
 export type ProductListQueryType = {
   page: number,
-  min: number,
-  max: number,
+  min: number | '',
+  max: number | '',
   sort: SortType
 }
 

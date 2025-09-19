@@ -1,16 +1,23 @@
 import { useState } from "react"
 import styles from './Parameters.module.css'
 
-type PricePropsType = {
-  min: number,
-  max: number,
-  submitPrice: (min: number, max:number) => void
-}
+import type { PricePropsType } from "./types"
 
-function Price({min, max, submitPrice}: PricePropsType) {
+function Price({min, max, submitPrice, visible}: PricePropsType) {
 
   const [newMin, setNewMin] = useState(min)
   const [newMax, setNewMax] = useState(max)
+
+  if (visible != 'price') {
+    clearUnsubmittedInputs()
+    return null
+  }
+  function clearUnsubmittedInputs () {
+    if (min != newMin || max != newMax) {
+      setNewMin(min)
+      setNewMax(max)
+    }
+  }
   function handleMin (e: React.ChangeEvent<HTMLInputElement>) {
     const newVal = parseInt(e.target.value)
     setNewMin(newVal)
@@ -23,14 +30,13 @@ function Price({min, max, submitPrice}: PricePropsType) {
     e.preventDefault()
     submitPrice(newMin, newMax)
   }
-
-  return (
+  console.log(min, newMin)
+  console.log(max, newMax)
+  return (  
     <div>
-      <h4>Select Price</h4>
-
       <form>
-        <input onChange={handleMin} type="number" name="min" id="min" placeholder="From"/>
-        <input onChange={handleMax} type="number" name="max" id="max" placeholder="To" />
+        <input onChange={handleMin} value={newMin} type="number" name="min" id="min" placeholder="From"/>
+        <input onChange={handleMax} value={newMax} type="number" name="max" id="max" placeholder="To" />
         <button onClick={applyPriceFIlter}>Apply</button>
       </form>
 
