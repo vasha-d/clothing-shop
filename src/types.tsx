@@ -20,7 +20,7 @@ export type ProductListQueryType = {
 export type ProductObjType = {
   color: string,
   id: number,
-  available_sizes?: string[],
+  available_sizes: string[],
   available_colors: string[],
   cover_image: string,
   description?: null,
@@ -31,9 +31,16 @@ export type ProductObjType = {
   
 }
 
-export type PageFetchReturnType = {
+export type PageFetchDataType = {
   data: ProductObjType[],
   links: (string | null)[]
+} | null
+
+export type UseGetPageReturnType = {
+  data: PageFetchDataType,
+  loading: boolean,
+  query: ProductListQueryType,
+  setQuery: React.Dispatch<React.SetStateAction<ProductListQueryType>>
 }
 
 

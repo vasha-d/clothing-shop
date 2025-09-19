@@ -1,19 +1,16 @@
-import type { ProductObjType } from "../../../types"
+import type  {ProductObjType, UseGetPageReturnType } from "../../../types"
 import ProductCard from "./ProductCard"
-import useGetPage from "./useGetPage"
 import styles from './ProductList.module.css'
 import Parameters from "./Parameters/Parameters"
+import { useOutletContext } from "react-router-dom"
 function ProductList() {
 
-  const {data, query, setQuery, loading} = useGetPage()
 
-  if (loading) return 'Loading...'
-  
-
-
+  const {data, query, setQuery} = useOutletContext() as UseGetPageReturnType
   const list = data?.data.map((product: ProductObjType) => {
     return <ProductCard key={product.id} productObj={product}></ProductCard>
   }) 
+
   console.log(data)
   return (
     <div>

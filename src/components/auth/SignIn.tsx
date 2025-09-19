@@ -31,7 +31,7 @@ function SignIn() {
     // document.cookie = `token=${token}; Secure; SameSite=Lax`
     //If Sign In successful, go to shop page
     if (req.status == 200) {
-      navigate('/shop')
+      navigate('/products')
     }
   }
   return (

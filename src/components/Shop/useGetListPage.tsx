@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getPage } from "../api/products";
-import type { PageFetchReturnType, ProductListQueryType } from "../../../types";
+import { getPage } from "./api/products";
+import type { PageFetchDataType, ProductListQueryType, UseGetPageReturnType } from "../../../types";
 
 const defaultQuery: ProductListQueryType = {
   page: 1,
@@ -8,10 +8,10 @@ const defaultQuery: ProductListQueryType = {
   max: '',
   sort: 'created_at'
 }
-export default function useGetPage() {
+export default function useGetPage() : UseGetPageReturnType {
 
   const [query, setQuery] = useState(defaultQuery)
-  const [data, setData] = useState<PageFetchReturnType | null>(null)
+  const [data, setData] = useState<PageFetchDataType>(null)
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     

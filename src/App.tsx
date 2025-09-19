@@ -8,7 +8,7 @@ import CheckOut from './components/Shop/CheckOut/CheckOut'
 import Navbar from './components/Shop/Navbar'
 import ProductList from './components/Shop/ProductList/ProductList'
 function App() {
-
+  
   return (
       <>
         <Navbar></Navbar>
@@ -19,7 +19,7 @@ function App() {
           <Route path='/sign-in' element={<SignIn></SignIn>}></Route>
           <Route path='/products' element={<Shop></Shop>}>
             <Route path='' element= {<ProductList></ProductList>}></Route>
-            <Route path=':id' element={<ProductPage></ProductPage>}></Route>
+            <Route path=':id' element={<ProductPage ></ProductPage>}></Route>
             <Route path='check-out' element={<CheckOut></CheckOut>}></Route>
           </Route>
         </Routes>

@@ -19,10 +19,10 @@ export async function getCart(token: string) {
 }
 
 export async function
-postCartItem (productObj: ProductObjType, quantity: number, token: string) {
-  const url = api + `/products/${productObj.id}`
+postCartItem (id: number, color: string, size: string, quantity: number, token: string) {
+  const url = api + `/products/${id}`
   
-  const data = {color: productObj.color, size: productObj.size, quantity}
+  const data = {color:color, size: size, quantity}
 
   const req = await axios.post(url, data, configObj(token))
 
