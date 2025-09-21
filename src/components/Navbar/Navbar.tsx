@@ -10,7 +10,6 @@ function Navbar({visible, setVisible, setRefresh}) {
   const {pathname} = useLocation()
 
   const isInAuthorizationRoutes = ['/register', '/sign-in'].includes(pathname)
-  console.log(isInAuthorizationRoutes, pathname)
 
   function openCart(){
     setVisible(true)
@@ -22,7 +21,7 @@ function Navbar({visible, setVisible, setRefresh}) {
       <div className={styles.logo} >
         <img src={logo} alt="" />  
         <span>
-          ReadSeam Clothing
+          RedSeam Clothing
         </span>
       </div>      
 

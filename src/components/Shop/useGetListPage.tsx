@@ -26,6 +26,5 @@ export default function useGetPage() : UseGetPageReturnType {
     fetchProducts()
   }, [query.page, query.min, query.max, query.sort])
 
-  console.log(query)
   return {data, setQuery, query, loading}
 }

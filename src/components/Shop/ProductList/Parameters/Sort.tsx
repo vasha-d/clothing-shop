@@ -4,9 +4,9 @@ import styles from './Parameters.module.css'
 import type { SortFilterPropsType } from "./types"
 //Applies '.selected' class to whichever option is selected
 function getClass(id: SortType, sortVal: SortType) {
-  let className = ''
+  let className = styles.sortOption
   if (sortVal == id) {
-    className += styles.selected
+    className += ' '+styles.selected
   }
 
   return className
@@ -29,15 +29,12 @@ function Sort({sort, submitSort, visible}: SortFilterPropsType) {
     const newSortVal = target.id as SortType 
     console.log('setting new', newSortVal)
     setNewSort(newSortVal)
-
-  }
-  function applySort() {
-    submitSort(newSort)
+    submitSort(newSortVal)
   }
   console.log(sort, newSort)
   return (
-    <div>
-    
+    <div className={styles.sort}>
+      <div className={styles.sortHead}>Sort by</div>
       <div>
         <div
           onClick={changeSort}
@@ -53,7 +50,6 @@ function Sort({sort, submitSort, visible}: SortFilterPropsType) {
           id="-price">Price, high to low</div>
       </div>
 
-      <button onClick={applySort}>Submit</button>
     </div>
   )
 }

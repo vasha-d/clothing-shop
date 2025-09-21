@@ -3,7 +3,6 @@ import type { CartControlsHookType } from "../../../types"
 
 function CartPanel({loading,visible, cartData, setVisible, setRefresh}: CartControlsHookType) {
   const navigate = useNavigate()
-  console.log(cartData)
   if (loading || !visible )return null
 
   function closeCart()  {

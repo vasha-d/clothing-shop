@@ -3,13 +3,23 @@ import Price from "./Price"
 import Sort from "./Sort"
 import type { ProductListQueryType, SortType } from "../../../../types"
 import type { filterVisibleType } from "./types"
+import priceFilterIcon from '../../../../assets/filter.svg'
+import downChevron from '../../../../assets/down-chevron.svg'
+import styles from './Parameters.module.css'
+
 type ParamPropsType = {
   query: ProductListQueryType,
   setQuery: React.Dispatch<React.SetStateAction<ProductListQueryType>>
 }
+const sortTypeToText = {
+  created_at: 'New products first',
+  price: 'Price, low to high',
+  '-price': 'Price, high to low'
+}
 function Parameters({query, setQuery}: ParamPropsType) {
   const [visible, setVisible] = useState<filterVisibleType>('none')
   const paramsRef = useRef<HTMLDivElement>(null)
+  console.log(query)
   function submitPrice (min: number | '', max: number | '') {
     setQuery(prev => {
       return {...prev, min, max}
@@ -44,25 +54,37 @@ function Parameters({query, setQuery}: ParamPropsType) {
       const clickedOutsideDiv = !paramsRef.current?.contains(target)
       if (clickedOutsideDiv) {
         setVisible('none')
+        document.removeEventListener('click', runOnClick)
       }
     }
     document.addEventListener('click', runOnClick) 
   }
   return (
-    <div ref={paramsRef}>
-      <h4 onClick={onClickPriceHeader}>Select Price</h4>
-      <Price 
-        min={query.min}
-        max={query.max}
-        visible = {visible}
-        submitPrice={submitPrice}
-      ></Price>
-      <h4 onClick={onClickSortHeader}>Sort By</h4>
-      <Sort 
-        visible = {visible}
-        sort={query.sort}
-        submitSort={submitSort}
-      ></Sort>
+    <div className={styles.container} ref={paramsRef}>
+      <div className={styles.parameter}>
+        <div className={styles.openParamsButton} onClick={onClickPriceHeader}>
+          <img src={priceFilterIcon} alt="" />
+          Filter
+        </div>
+        <Price 
+          min={query.min}
+          max={query.max}
+          visible = {visible}
+          submitPrice={submitPrice}
+        ></Price>
+      </div>
+      <div className={styles.parameter}> 
+        <div className={styles.openParamsButton} onClick={onClickSortHeader}>
+          {visible == 'sort' ? 'Sort by' : sortTypeToText[query.sort]} 
+          <img src={downChevron} alt="" />
+        </div>
+        <Sort 
+          visible = {visible}
+          sort={query.sort}
+          submitSort={submitSort}
+        ></Sort>
+      </div>
+
     </div>
   )
 }

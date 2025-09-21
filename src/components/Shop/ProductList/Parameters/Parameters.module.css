@@ -1,3 +1,98 @@
-.selected {
-  background-color: grey;
+
+.container {
+  font-size: 16px;
+  display: flex;
+  gap: 20px;
+}
+
+.openParamsButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  height: 24px;
+  }
+.parameter {
+  position: relative;
+}
+
+.price {
+  height: 170px;
+  width: 392px;
+  position: absolute;
+  top: 28px;
+  right: -10px;
+  border: 1px solid var(--grey2);
+  padding: 16px;
+  border-radius: 8px;
+  z-index: 3;
+  background-color: white;
+}
+
+.priceHead, .sortHead {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-blue);
+  margin-bottom: 20px;
+  z-index: 2;
+}
+
+.priceForm {
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}
+.priceForm > input {
+  font-size: 14px;
+  height: 42px;
+  border-radius: 8px;
+  border: 1px solid var(--grey2);
+  color: var(--dark-blue2);
+  padding-inline: 12px;
+  box-sizing: border-box;
+  width: 175px;
+}
+
+.applyPrice {
+  margin-left: auto;
+  padding: 10px 20px;
+  background-color: var(--red);
+  color: white;
+  border-radius: 10px;
+  width: 124px;
+  height: 41px;
+  border: none;
+  cursor: pointer;
+}
+
+.sort {
+  height: 184px;
+  width: 224px;
+  position: absolute;
+  top: 28px;
+  right: -10px;
+  border: 1px solid var(--grey2);
+  border-radius: 8px;
+  padding: 16px 0;
+  z-index: 3;
+  background-color: white;
+}
+
+.sortHead {
+  margin-bottom: 4px;
+  padding: 0 16px;
+}
+
+.sortOption {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.sortOption:hover{
+  background-color: rgb(230, 236, 242);
+}
+.selected, .selected:hover {
+  background-color: rgb(183, 190, 196); 
 }

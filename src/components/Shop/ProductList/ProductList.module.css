@@ -1,4 +1,35 @@
+
+.page {
+  padding: 0 100px;
+}
+
 .listContainer {
   display: grid;
-  grid-template-columns: 200px 200px 200px;
+  grid-template-columns: repeat(4,412px);
+  gap: 24px;
+}
+
+.head {
+  margin-top: 80px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.products {
+  font-weight: 600;
+  font-size: 42px;
+}
+.pageMeta {
+  font-weight: 400;
+  color: var(--dark-blue2);
+  font-size: 12px;
+  border-right: 1px solid #E1DFE1;
+  padding-right: 36px;
+}
+
+.rightEnd {
+  display: flex;
+  align-items: center;
+  gap: 36px;
 }

@@ -33,11 +33,12 @@ function Price({min, max, submitPrice, visible}: PricePropsType) {
   console.log(min, newMin)
   console.log(max, newMax)
   return (  
-    <div>
-      <form>
+    <div className={styles.price}> 
+      <div className={styles.priceHead}>Select price</div>
+      <form className={styles.priceForm}>
         <input onChange={handleMin} value={newMin} type="number" name="min" id="min" placeholder="From"/>
         <input onChange={handleMax} value={newMax} type="number" name="max" id="max" placeholder="To" />
-        <button onClick={applyPriceFIlter}>Apply</button>
+        <button className={styles.applyPrice} onClick={applyPriceFIlter}>Apply</button>
       </form>
 
     </div>
