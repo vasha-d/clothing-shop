@@ -16,6 +16,7 @@ export async function getCart(token: string) {
 
   const req = await axios.get(url, configObj(token))
   console.log(req.data)
+  return req
 }
 
 export async function

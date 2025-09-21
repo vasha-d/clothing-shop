@@ -30,6 +30,19 @@ export type ProductObjType = {
   name: string
   
 }
+export type CartItemType = {
+  color: string,
+  id: number,
+  available_sizes: string[],
+  available_colors: string[],
+  cover_image: string,
+  description?: null,
+  images: string[],
+  price: number,
+  release_year: string,
+  name: string
+  quantity: number
+}
 
 export type PageFetchDataType = {
   data: ProductObjType[],
@@ -48,3 +61,17 @@ export type SortType =
  `price` |
  `-price` |
  `created_at` 
+
+
+export type CartControlsHookType = {
+  visible: boolean,
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>,
+  loading: boolean,
+  cartData: CartItemType[] | null
+}
+
+export type useCartPanelType = {
+  cartElement: React.ReactElement, 
+  controls: CartControlsHookType
+}

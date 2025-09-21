@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 toadd.md
+todo.md
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

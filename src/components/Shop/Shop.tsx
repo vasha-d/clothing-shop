@@ -1,16 +1,15 @@
 import { Outlet } from "react-router-dom"
-import CartPanel from "./CartPanel/CartPanel"
 import useGetPage from "./useGetListPage"
-function Shop() {
+import type { useCartPanelType } from "../../types"
+function Shop({cartHook}: {cartHook: useCartPanelType}) {
   
   const outletContext  = useGetPage()
-
+  const {cartElement} = cartHook
   if (outletContext.loading) return 'Loading...'
-  
   return (
     <>
       <Outlet context={outletContext}></Outlet>
-      <CartPanel></CartPanel>
+      {cartElement}
     </>
   )
 }
