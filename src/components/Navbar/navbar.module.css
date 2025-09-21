@@ -1,4 +1,39 @@
 .navbar {
   display: flex;
+  justify-content: space-between;
   gap: 200px;
+  width: 100%;
+  padding: 10px 100px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-blue);
+
+}
+.rightEnd {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.avatar {
+  height: 36px;
+  overflow: hidden;
+  padding-bottom: 4px;
+}
+
+.cart {
+  cursor: pointer;
+  transition: transform 0.1s linear;  
+}
+.cart:hover {
+  transform: scale(1.05);
+}
+.cart:active {
+  transform: scale(1.1);
 }

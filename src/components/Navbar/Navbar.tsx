@@ -1,5 +1,9 @@
 import { useLocation } from "react-router-dom"
 import styles from './navbar.module.css'
+import logo from '../../assets/logo.svg'
+import cartIcon from '../../assets/cart.svg'
+import avatarPlaceholder from '../../assets/avatar-placeholder.svg'
+
 function Navbar({visible, setVisible, setRefresh}) { 
 
 
@@ -15,9 +19,19 @@ function Navbar({visible, setVisible, setRefresh}) {
   return (
     <div className={styles.navbar}>
 
-      <div>Logo</div>      
+      <div className={styles.logo} >
+        <img src={logo} alt="" />  
+        <span>
+          ReadSeam Clothing
+        </span>
+      </div>      
 
-      <div onClick={openCart}>Cart</div>
+      <div className={styles.rightEnd}>
+        <div className={styles.cart} onClick={openCart}>
+          <img src={cartIcon} alt="" />
+        </div>
+        <img className={styles.avatar} src={avatarPlaceholder} alt="" />
+      </div>
     </div>
   )
 }
