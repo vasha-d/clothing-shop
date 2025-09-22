@@ -46,8 +46,11 @@ export type CartItemType = {
 
 export type PageFetchDataType = {
   data: ProductObjType[],
-  links: (string | null)[],
-  meta: {
+  links: string[],
+  meta: PaginationMetaType
+} 
+
+export type PaginationMetaType = {
     current_page: number,
     from: number;
     last_page:number;
@@ -56,8 +59,7 @@ export type PageFetchDataType = {
     total: number;
     path: string;
     links: string[];
-  }
-} | null
+}
 
 export type UseGetPageReturnType = {
   data: PageFetchDataType,

@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
-import { getPage } from "./api/products";
+import { getPage } from "../api/products";
 import type { PageFetchDataType, ProductListQueryType, UseGetPageReturnType } from "../../../types";
 
 const defaultQuery: ProductListQueryType = {
-  page: 1,
+  page: 4,
   min: 0,
   max: '',
   sort: 'created_at'
 }
-export default function useGetPage() : UseGetPageReturnType {
+type pageHookType = {
+  data: PageFetchDataType | null,
+  loading: boolean,
+  query: ProductListQueryType,
+  setQuery: React.Dispatch<React.SetStateAction<ProductListQueryType>>
+}
+export default function useGetPage() : pageHookType {
 
   const [query, setQuery] = useState(defaultQuery)
-  const [data, setData] = useState<PageFetchDataType>(null)
+  const [data, setData] = useState<PageFetchDataType | null>(null)
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     

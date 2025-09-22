@@ -3,6 +3,7 @@ import ProductCard from "./ProductCard"
 import styles from './ProductList.module.css'
 import Parameters from "./Parameters/Parameters"
 import { useOutletContext } from "react-router-dom"
+import Pages from "./Pages/Pages"
 function ProductList() {
   const {data, query, setQuery} = useOutletContext() as UseGetPageReturnType
   const list = data?.data.map((product: ProductObjType) => {
@@ -11,6 +12,7 @@ function ProductList() {
 
   console.log(data)
   console.log(window.innerWidth, window.innerHeight)
+
   return (
     <div className={styles.page}>
 
@@ -30,6 +32,7 @@ function ProductList() {
       <div className={styles.listContainer}>
         {list}
       </div>
+      <Pages setQuery={setQuery} meta={data?.meta}></Pages>
     </div>
   )
 }

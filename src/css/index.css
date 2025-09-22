@@ -3,7 +3,9 @@
   line-height: 1.5;
   --dark-blue: #10151F;
   --dark-blue2: #3E424A;
+  --grey: #F8F6F7;
   --grey2: #E1DFE1;
+  --dark-grey: #212B36;
   --red: #FF4000;
   width: 100%;
   color: var(--dark-blue);

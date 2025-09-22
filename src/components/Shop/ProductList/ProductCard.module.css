@@ -1,6 +1,7 @@
 .card {
   display: block;
   box-shadow: 0 6px 10px 0.5px rgba(209, 211, 229, 0.678);
+  padding-left: 4px;
 }
 
 
