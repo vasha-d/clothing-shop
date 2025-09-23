@@ -1,4 +1,4 @@
-import React from 'react'
+import styles from './ProductPage.module.css'
 
 const allQuantities = [1,2,3,4,5,6,7,8,9,10]
 function PickQuantity({currentQuantity, setQuantity}:{
@@ -13,9 +13,9 @@ function PickQuantity({currentQuantity, setQuantity}:{
   })
 
   return (
-    <div>
-
-      <select onChange={handleChange}>
+    <div className={styles.pickQuantityContainer}>
+      Quantity 
+      <select className={styles.selectQuantity} onChange={handleChange}>
         {options}
       </select>
     </div>

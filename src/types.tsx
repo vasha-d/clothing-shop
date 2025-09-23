@@ -30,6 +30,14 @@ export type ProductObjType = {
   name: string
   
 }
+export type FullProductObjType = ProductObjType & {
+  brand: BrandObjType
+}
+export type BrandObjType = {
+  id: number,
+  image: string,
+  name: string
+}
 export type CartItemType = {
   color: string,
   id: number,

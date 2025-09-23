@@ -14,7 +14,7 @@ function Images({links, allColors, currentColor, setColor}:
   })
 
   return (
-    <div>
+    <div className={styles.imgContainer}>
       <div className={styles.sideImages}>
         {imgList}
 

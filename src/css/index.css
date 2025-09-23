@@ -20,6 +20,7 @@
 }
 div, a, button, input {
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 h1 {
