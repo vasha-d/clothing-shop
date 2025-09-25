@@ -7,7 +7,6 @@ function Images({links, allColors, currentColor, setColor}:
   
   const imgList = allColors.map((value, index) => {
     function onClickImg () {
-      console.log('dong')
       setColor(value)
     }
     return <img onClick={onClickImg} key={index} id={value} src={links[index]}></img>

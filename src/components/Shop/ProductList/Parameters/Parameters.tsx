@@ -19,7 +19,6 @@ const sortTypeToText = {
 function Parameters({query, setQuery}: ParamPropsType) {
   const [visible, setVisible] = useState<filterVisibleType>('none')
   const paramsRef = useRef<HTMLDivElement>(null)
-  console.log(query)
   function submitPrice (min: number | '', max: number | '') {
     setQuery(prev => {
       return {...prev, min, max}

@@ -4,7 +4,7 @@ import logo from '../../assets/logo.svg'
 import cartIcon from '../../assets/cart.svg'
 import avatarPlaceholder from '../../assets/avatar-placeholder.svg'
 
-function Navbar({visible, setVisible, setRefresh}) { 
+function Navbar({visible, setVisible}) { 
 
 
   const {pathname} = useLocation()
@@ -13,7 +13,6 @@ function Navbar({visible, setVisible, setRefresh}) {
 
   function openCart(){
     setVisible(true)
-    setRefresh((r:boolean) => !r)
   }
   return (
     <div className={styles.navbar}>

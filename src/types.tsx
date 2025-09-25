@@ -49,7 +49,8 @@ export type CartItemType = {
   price: number,
   release_year: string,
   name: string
-  quantity: number
+  quantity: number,
+  size: string
 }
 
 export type PageFetchDataType = {
@@ -86,12 +87,15 @@ export type SortType =
 export type CartControlsHookType = {
   visible: boolean,
   setVisible: React.Dispatch<React.SetStateAction<boolean>>,
-  setRefresh: React.Dispatch<React.SetStateAction<boolean>>,
   loading: boolean,
-  cartData: CartItemType[] | null
+  cartData: CartDataType | null,
+  setCartData: React.Dispatch<React.SetStateAction<CartDataType | null>>
 }
 
 export type useCartPanelType = {
   cartElement: React.ReactElement, 
   controls: CartControlsHookType
 }
+
+
+export type CartDataType = CartItemType[]

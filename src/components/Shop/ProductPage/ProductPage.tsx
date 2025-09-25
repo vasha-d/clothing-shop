@@ -1,5 +1,5 @@
 import {useParams } from "react-router-dom"
-import type { FullProductObjType } from "../../../types"
+import type { FullProductObjType, CartDataType, CartItemType } from "../../../types"
 import styles from './ProductPage.module.css'
 import PickColor from "./PickColor/PickColor"
 import { useState } from "react"
@@ -14,15 +14,18 @@ function toTitleCase(name: string) {
   return name[0].toUpperCase() + name.slice(1)
 }
 
-function ProductPage() {
+function ProductPage({setCartData}:{setCartData: React.Dispatch<React.SetStateAction<CartDataType | null>>}) {
   const id = parseInt(useParams().id as string)
   const {loading, data} = useGetProduct(id)
   if (loading) return 'Loading...'
-  return <LoadedPage productObj={data as FullProductObjType}></LoadedPage>
+  return <LoadedPage 
+  setCartData={setCartData as React.Dispatch<React.SetStateAction<CartDataType>>} 
+  productObj={data as FullProductObjType}></LoadedPage>
 
 }
 
-function LoadedPage({productObj}: {productObj: FullProductObjType}) {
+function LoadedPage({productObj, setCartData}: 
+  {productObj: FullProductObjType, setCartData: React.Dispatch<React.SetStateAction<CartDataType>>}) {
 
   const {available_sizes, available_colors, id} = productObj 
   const [color, setColor] = useState<string>(available_colors[0])
@@ -32,10 +35,27 @@ function LoadedPage({productObj}: {productObj: FullProductObjType}) {
   async function clickAddToCart() {
     const token = localStorage.getItem('token') as string
     const req = postCartItem(id, color, size, quantity, token) 
-    console.log(req)
+    updateInternalCart()
   }
-  console.log(productObj)
-  console.log(quantity, size, color)
+  function updateInternalCart() {
+    setCartData(currentCart => {  
+      let isExactItemInCart = currentCart.some(i => {
+        return i.id == id && i.size == size && i.color == color
+      })
+
+      const newCart = currentCart.map(item => {return {...item}})
+      console.log(isExactItemInCart)
+      if (isExactItemInCart) {
+        let index = currentCart.findIndex(i => i.id == id && i.color == color && i.size == size)
+        newCart[index].quantity += quantity
+      } else {
+        let newItem = {...productObj, quantity, size, color}
+        newCart.push(newItem)
+      }
+      return newCart
+
+    })
+  }
   return (
     <div className={styles.page}> 
       <div className={styles.head}>

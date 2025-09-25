@@ -10,8 +10,6 @@ function ProductList() {
     return <ProductCard key={product.id} productObj={product}></ProductCard>
   }) 
 
-  console.log(data)
-  console.log(window.innerWidth, window.innerHeight)
 
   return (
     <div className={styles.page}>

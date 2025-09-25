@@ -6,14 +6,9 @@ function toTitleCase(name: string) {
 }
 function ProductCard({productObj}: {productObj: ProductObjType}) {
   
-
-  function onClickCard () {
-
-  }
-  
   return (
     <Link to={`/products/${productObj.id}`}>
-      <div className={styles.card} onClick={onClickCard}>        
+      <div className={styles.card} >        
         <div className={styles.prodImg}>
           <img src={productObj.cover_image} alt="" />
         </div>
