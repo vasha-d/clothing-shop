@@ -1,5 +1,5 @@
 import type { RegistrationObjType, SignInObjType } from "../../types";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 const api = 'https://api.redseam.redberryinternship.ge/api'
 
 export async function postNewAccount (obj: RegistrationObjType) {
@@ -12,13 +12,19 @@ export async function postNewAccount (obj: RegistrationObjType) {
       
     }
   }
-  const register = await axios.post(url, data, {
+  console.log(data)
+  try {
+    const register = await axios.post(url, data, {
     headers: {
       "Accept": "application/json"
     }
   })
-  console.log(register.data)
-  console.log(register)
+    return null 
+  } catch (error) {
+    return error as AxiosError
+  }
+
+
 }
 
 

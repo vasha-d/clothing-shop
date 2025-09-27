@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styles from './auth.module.css'
 import type { RegistrationObjType } from '../../types'
 import { postNewAccount } from './api'
+import useValidate from './useValidate'
 const defaultDataState = {
   username: '',
   email: '',
@@ -13,51 +14,66 @@ const defaultDataState = {
 function Register() {
 
   const [dataObj, setDataObj] = useState<RegistrationObjType>(defaultDataState)
-  const [avatarURL, setAvatarURL] = useState<string | undefined>(undefined)
+  
+  const {
+    username,
+    handleUsername,
+    email,
+    handleEmail,
+    password,
+    handlePassword,
+    confirmPassword,
+    handleConfirmPassword,
+    submitForm,
+    avatarFile,
+    handleFile,
+  } = useValidate()
 
-  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
-    const target = e.target as HTMLInputElement
-    const img = target.files?.[0] as File
-    const imgURL = URL.createObjectURL(img)
-    setDataObj(prev => {
-      return {...prev, avatar: img}
-    })
-    setAvatarURL(imgURL)
-  }
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    
-    console.log(e.target.id)
-    setDataObj(prev => {
-        return {...prev, [e.target.id]: e.target.value}
-      }
-    )
 
-    console.log(dataObj)
-  }
-  async function submitForm (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault()
-    const req = await postNewAccount(dataObj)
-    console.log(req)
-
+  function validClass(showError: boolean) {
+    return showError ? ' '+styles.invalid : ''
   }
   return (
     <div>
       <div className={styles.formContainer}>
           <form>
             <div className={styles.imgForm}>
-              aa
               <input onChange={handleFile} type="file" accept='image/*' />
-              <img src={avatarURL} ></img>
+              <img src={avatarFile.url} ></img>
             </div>
-            <input type="text" onChange={handleChange} value={dataObj.username}
-            placeholder='Username' name="username" id="username" />
-            <input type="email" name="email" id="email" onChange={handleChange} value={dataObj.email} />
-            <input type="password" name='password' id='password'
-              onChange={handleChange} value={dataObj.password}
-            ></input>
-            <input type="password" name='password_confirmation' id='password_confirmation'
-              onChange={handleChange} value={dataObj['password_confirmation']}
-            ></input>
+            <div className={styles.form + validClass(username.showError)}>
+              <input type="text" onChange={handleUsername} value={username.value}
+              placeholder='Username' name="username" id="username" />
+              <div className={styles.message}>
+                {username.showError ? username.message : ''}
+              </div>
+            </div>
+            <div className={styles.form + validClass(email.showError)}>
+              <input type="email" name="email" id="email" 
+              placeholder='Email'
+              onChange={handleEmail} value={email.value} />
+              <div className={styles.message}>
+                {email.showError ? email.message : ''}
+              </div>
+            </div>
+            <div className={styles.form + validClass(password.showError)}>
+              <input type="password" name='password' id='password'
+              onChange={handlePassword} value={password.value}
+              ></input>
+              <div className={styles.message}>
+                {password.showError ? password.message : ''}                
+              </div>
+            </div>
+            
+            <div className={styles.form + validClass(confirmPassword.showError)}>
+              <input type="password" name='password_confirmation' id='password_confirmation'
+              onChange={handleConfirmPassword} value={confirmPassword.value}
+              ></input>
+              <div className={styles.message}>
+                {confirmPassword.showError ? confirmPassword.message : ''}
+              </div>
+
+            </div>
 
             <button onClick={submitForm}>Register</button>
           </form>
