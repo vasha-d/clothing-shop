@@ -1,20 +1,12 @@
-import { useState } from 'react'
-import styles from './auth.module.css'
-import type { RegistrationObjType } from '../../types'
-import avatarPlaceholder from '../../assets/upload-avatar.svg'
-import { postNewAccount } from './api'
+import styles from '../auth.module.css'
+import avatarPlaceholder from '../../../assets/upload-avatar.svg' 
+import showPasswordImg from '../../../assets/show-password.svg'
 import useValidate from './useValidate'
-const defaultDataState = {
-  username: '',
-  email: '',
-  password: '',
-  password_confirmation: '',
-  avatar: null
-}
+import ErrorMessage from '../ErrorMessage'
+import PlaceHolderElement from '../FormPlaceholder'
+import { useState } from 'react'
 
 function Register() {
-
-  const [dataObj, setDataObj] = useState<RegistrationObjType>(defaultDataState)
   
   const {
     username,
@@ -25,32 +17,28 @@ function Register() {
     handlePassword,
     confirmPassword,
     handleConfirmPassword,
-    submitForm,
+    submitRegister,
     avatarFile,
     handleFile,
     removeAvatar
   } = useValidate()
 
+  const [passwordHidden, setPasswordHidden] = useState<Boolean[]>([true, true])
+  function isValidClass(showError: boolean) {
 
-  function validClass(showError: boolean) {
     return showError ? ' '+styles.invalid : ''
   }
-  function PlaceHolderElement ({text, value}: {text: string, value: string}) {
-
-    return (
-      <div className={!!value ? styles.hide : styles.placeholder }>
-        {text} <span>*</span>
-      </div>
-    )
-  }  
-  function ErrorMessage ({validationObj}: {validationObj: {value: string, showError: boolean}}) {
-
-    return (
-      <div className={styles.message}>
-        {validationObj.showError ? validationObj.message : ''}
-      </div> 
-    )
+  function toggleMainHidden() {
+    setPasswordHidden(h => {
+      return [!h[0], h[1]]
+    })
   }
+  function toggleConfirmationHidden() {
+    setPasswordHidden(h => {
+      return [h[0], !h[1]]
+    })
+  }
+
   return (
     <div className={styles.page}>
       <div className={styles.formContainer}>
@@ -58,6 +46,7 @@ function Register() {
             Registration
           </div>
           <form className={styles.formList}>
+
             <div className={styles.imgForm}>
               <img className={styles.avatar} src={avatarFile.url || avatarPlaceholder} />
               <label className={styles.imgLabel}>
@@ -66,35 +55,40 @@ function Register() {
               </label>
               <div onClick={removeAvatar} className={styles.removeAvatar}>Remove</div>
             </div>
-            <div className={styles.inputWrapper + validClass(username.showError)}>
+
+            <div className={styles.inputWrapper + isValidClass(username.showError)}>
               <input type="text" onChange={handleUsername} value={username.value}
                name="username" id="username" />
               <PlaceHolderElement text='Username' value={username.value}/>
               <ErrorMessage validationObj={username}/>
             </div>
-            <div className={styles.inputWrapper + validClass(email.showError)}>
+
+            <div className={styles.inputWrapper + isValidClass(email.showError)}>
               <input type="email" name="email" id="email" 
               onChange={handleEmail} value={email.value} />
               <PlaceHolderElement text='Email' value={email.value}/>
               <ErrorMessage validationObj={email}/>
             </div>
-            <div className={styles.inputWrapper + validClass(password.showError)}>
-              <input type="password" name='password' id='password'
+
+            <div className={styles.inputWrapper + isValidClass(password.showError)}>
+              <input type={passwordHidden[0] ? 'password' : 'text'} name='password' id='password'
               onChange={handlePassword} value={password.value}
               ></input>
               <PlaceHolderElement text='Password' value={password.value}/>
               <ErrorMessage validationObj={password}/>
+              <img onClick={toggleMainHidden} className={styles.togglePasswordHidden} src={showPasswordImg} alt="" />
             </div>
             
-            <div className={styles.inputWrapper + validClass(confirmPassword.showError)}>
-              <input type="password" name='password_confirmation' id='password_confirmation'
+            <div className={styles.inputWrapper + isValidClass(confirmPassword.showError)}>
+              <input type={passwordHidden[1] ? 'password' : 'text'} name='password_confirmation' id='password_confirmation'
               onChange={handleConfirmPassword} value={confirmPassword.value}
               ></input>
               <PlaceHolderElement text='Confirm Password' value={confirmPassword.value}/>
               <ErrorMessage validationObj={confirmPassword}/>
-
+              <img onClick={toggleConfirmationHidden} className={styles.togglePasswordHidden} src={showPasswordImg} alt="" />
             </div>
-            <button className= {styles.register} onClick={submitForm}>Register</button>
+            
+            <button className= {styles.submit} onClick={submitRegister}>Register</button>
             <a className={styles.altLink} href="/sign-in">
               Already a member?  <span>Log in</span>
             </a>

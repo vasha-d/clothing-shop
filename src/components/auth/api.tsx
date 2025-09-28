@@ -21,28 +21,30 @@ export async function postNewAccount (obj: RegistrationObjType) {
   })
     return null 
   } catch (error) {
+    console.log(error)
     return error as AxiosError
   }
 
 
 }
-
-
 export async function postSignIn(signInObj: SignInObjType) {
 
   const url = api + '/login'
   const data = new FormData()
   data.append('email',signInObj.email)
   data.append('password',signInObj.password)
+  try {
+    const signIn = await axios.post(url, signInObj, {
+      headers: {
+        "Accept": 'application/json'
+      } 
+    })
+    return signIn   
+  } catch (error) {
+    console.log(error)
+    return error as AxiosError
+  }
 
-
-
-  const signIn = await axios.post(url, signInObj, {
-    headers: {
-      "Accept": 'application/json'
-    } 
-  })
-  return signIn
 
 }
 

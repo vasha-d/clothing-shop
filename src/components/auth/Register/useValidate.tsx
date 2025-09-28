@@ -1,6 +1,8 @@
 import { useState } from "react";
-import type { RegistrationObjType } from '../../types'
-import { postNewAccount } from "./api";
+import type { RegistrationObjType } from '../../../types'
+import { postNewAccount, postSignIn } from "../api";
+import type { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 type ValidationObjType = {
   value: string,
@@ -20,7 +22,7 @@ function useValidate() {
   const [password, setPassword] = useState(defaultValidationObj)
   const [confirmPassword, setConfirmPassword] = useState(defaultValidationObj)
   const [avatarFile, setAvatarFile] = useState<avatarObjTye>({url: undefined, file: null})
-
+  const navigate = useNavigate()
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.target as HTMLInputElement
     const file = target.files?.[0] as File
@@ -67,7 +69,7 @@ function useValidate() {
     setPassword({value, valid, message: symbolsMsg, showError})
     
     
-    const showConfirmError = !!confirmPassword.value && !!matchMsg
+    const showConfirmError = !!matchMsg
     setConfirmPassword(prev => {
       return {...prev, valid: confrimFieldValid, message: matchMsg, showError: showConfirmError}
     })
@@ -83,18 +85,8 @@ function useValidate() {
   function removeAvatar () {
     setAvatarFile({url: undefined, file: null})
   }
-  async function submitForm (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault()
-    const dataObj = {
-      username: username.value,
-      email: email.value,
-      password: password.value,
-      password_confirmation: confirmPassword.value,
-      avatar: avatarFile.file || null
-    }
-    console.log(dataObj)
-    const req = await postNewAccount(dataObj)
-    const messages = req?.response?.data?.errors
+  function handleBackendError(error: AxiosError | null) {
+    const messages = error?.response?.data?.errors
     if (!messages) return;
     if (messages.email) {
       setEmail(u => {
@@ -107,6 +99,20 @@ function useValidate() {
       })
     }
   }
+  async function submitRegister (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault()
+    const dataObj = {
+      username: username.value,
+      email: email.value,
+      password: password.value,
+      password_confirmation: confirmPassword.value,
+      avatar: avatarFile.file || null
+    }
+    console.log(dataObj)
+    const req = await postNewAccount(dataObj)
+    handleBackendError(req)
+  }
+
   return {
     username,
     handleUsername,
@@ -118,7 +124,7 @@ function useValidate() {
     handleConfirmPassword,
     avatarFile,
     handleFile,
-    submitForm,
+    submitRegister,
     removeAvatar
   }
 

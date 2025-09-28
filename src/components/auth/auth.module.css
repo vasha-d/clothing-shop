@@ -102,10 +102,8 @@
   font-size: 10px;
   color: var(--red);
   left: 12px;
+  top: 45px;
 }
-
-
-
 
 
 
@@ -120,7 +118,7 @@
 }
 
 
-.register {
+.submit {
   background-color: var(--red);
   color: white;
   border: none;
@@ -139,4 +137,17 @@
   margin-left: 8px;
   color: red;
   font-weight: 600;
+}
+
+
+.togglePasswordHidden {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.togglePasswordHidden:active {
+  scale: 1.04;
 }
