@@ -64,7 +64,7 @@ function useValidate() {
     
     const confrimFieldValid = value == confirmPassword.value
     const matchMsg = confrimFieldValid ? '' : 'Password fields must match!'
-    setPassword({value, valid, message: symbolsMsg || matchMsg, showError})
+    setPassword({value, valid, message: symbolsMsg, showError})
     
     
     const showConfirmError = !!confirmPassword.value && !!matchMsg
@@ -79,6 +79,9 @@ function useValidate() {
     const showError = !valid
     
     setConfirmPassword({value, valid, message, showError})
+  }
+  function removeAvatar () {
+    setAvatarFile({url: undefined, file: null})
   }
   async function submitForm (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
@@ -115,7 +118,8 @@ function useValidate() {
     handleConfirmPassword,
     avatarFile,
     handleFile,
-    submitForm
+    submitForm,
+    removeAvatar
   }
 
 }
