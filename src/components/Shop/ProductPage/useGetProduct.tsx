@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { getItem } from "../api/products"
 import type { FullProductObjType } from "../../../types"

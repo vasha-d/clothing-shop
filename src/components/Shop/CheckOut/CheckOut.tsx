@@ -6,11 +6,7 @@ import ErrorMessage from './ErrorMessage'
 import useValidate from './useValidate'
 import type { CartDataType, useCartPanelType } from '../../../types'
 import { useNavigate } from 'react-router-dom'
-type CheckoutProps =   {
-  cartElement: React.ReactElement<unknown, string | React.JSXElementConstructor<any>>, 
-  setCartData: React.Dispatch<React.SetStateAction<CartDataType | null>>
-  isCartEmpty: boolean
-}
+
 function CheckOut({controls,cartElement}: useCartPanelType) {
 
   console.log(readCookie()) 

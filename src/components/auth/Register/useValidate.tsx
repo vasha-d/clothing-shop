@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { RegistrationObjType } from '../../../types'
 import { postNewAccount, postSignIn } from "../api";
 import type { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
@@ -134,7 +133,7 @@ function useValidate() {
     console.log(dataObj)
     const req = await postNewAccount(dataObj)
     if (req?.status == 200) {
-      const signin = await postSignIn({
+      await postSignIn({
         email: email.value,
         password: password.value
       })

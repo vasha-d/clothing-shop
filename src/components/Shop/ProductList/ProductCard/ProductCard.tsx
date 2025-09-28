@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import type { ProductObjType } from '../../../types'
+import type { ProductObjType } from '../../../../types'
 import styles from './ProductCard.module.css'
 function toTitleCase(name: string) {
   return name[0].toUpperCase()+name.slice(1)

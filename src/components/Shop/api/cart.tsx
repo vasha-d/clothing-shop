@@ -1,5 +1,4 @@
 import axios, { AxiosError } from "axios"
-import type { CartDataType } from "../../../types"
 
 
 
@@ -57,7 +56,7 @@ patchCartProduct(id: number, color: string, size: string, quantity: number, toke
 export async function deleteCartProduct(id: number, color: string, size: string,  token: string | null) {
   const url = api + `/products/${id}`
   const data = {color, size}
-  const req = await axios.delete(url,  configObj(token))
+  const req = await axios.delete(url, {...configObj(token), data})
   console.log(req.data)
   return req
 }
@@ -76,7 +75,6 @@ export async function postCheckOut(token: string, formData) {
     
     return response
   } catch (error) {
-    const e = error as AxiosError
     return error
   }
 

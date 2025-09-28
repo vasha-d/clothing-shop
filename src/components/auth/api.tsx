@@ -40,11 +40,10 @@ export async function postSignIn(signInObj: SignInObjType) {
       } 
     })
 
-    const token = req.data
-      const userObj = {
-        ...req.data.user,
-        token: req.data.token
-      }
+    const userObj = {
+      ...req.data.user,
+      token: req.data.token
+    }
     document.cookie = `user=${encodeURIComponent(JSON.stringify(userObj))}`
     console.log(userObj)
     

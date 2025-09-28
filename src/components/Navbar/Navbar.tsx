@@ -13,9 +13,9 @@ function Navbar({setVisible} : {setVisible: React.Dispatch<SetStateAction<boolea
   const navigate = useNavigate()
   const isInAuthorizationRoutes = ['/register', '/sign-in'].includes(pathname)
 
+  let isAuthorized = !!readCookie().email
   function openCart(){
 
-    let isAuthorized = !!readCookie().email
 
     if (!isAuthorized) {
       navigate('/sign-in')
@@ -51,7 +51,7 @@ function Navbar({setVisible} : {setVisible: React.Dispatch<SetStateAction<boolea
       </Link>      
 
       <div className={styles.rightEnd}>
-        {isInAuthorizationRoutes ? unauthorizedElement : authorizedElement}
+        {!isInAuthorizationRoutes && isAuthorized ? authorizedElement : unauthorizedElement}
       </div>
     </div>
   )

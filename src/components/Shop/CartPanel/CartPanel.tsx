@@ -1,11 +1,10 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 import type { CartControlsHookType, CartDataType } from "../../../types"
 import styles from './CartPanel.module.css'
 import { useRef } from "react"
 import CartItem from "./CartItem/CartItem"
 import Pricing from "./Pricing"
 import PanelHead from "./PanelHead"
-import { readCookie } from "../../auth/api"
 import EmptyCart from "./EmptyCart/EmptyCart"
 
 type LoadedPanelProps = CartControlsHookType & {

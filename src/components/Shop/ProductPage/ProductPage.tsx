@@ -1,5 +1,5 @@
 import {useNavigate, useParams } from "react-router-dom"
-import type { FullProductObjType, CartDataType, CartItemType } from "../../../types"
+import type { FullProductObjType, CartDataType } from "../../../types"
 import styles from './ProductPage.module.css'
 import PickColor from "./PickColor/PickColor"
 import { useState } from "react"

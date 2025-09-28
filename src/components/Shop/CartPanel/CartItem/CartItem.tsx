@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react'
 import type { CartItemType } from '../../../../types'
 import { deleteCartProduct, patchCartProduct } from '../../api/cart'
 import styles from './CartItem.module.css'

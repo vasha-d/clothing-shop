@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getPage } from "../api/products";
-import type { PageFetchDataType, ProductListQueryType, UseGetPageReturnType } from "../../../types";
+import type { PageFetchDataType, ProductListQueryType } from "../../../types";
 
 const defaultQuery: ProductListQueryType = {
   page: 1,
