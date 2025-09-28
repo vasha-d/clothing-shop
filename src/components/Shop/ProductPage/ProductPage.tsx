@@ -58,7 +58,6 @@ function LoadedPage({productObj, setCartData}:
       })
 
       const newCart = currentCart?.map(item => {return {...item}}) || []
-      (isExactItemInCart)
       if (isExactItemInCart) {
         let index = currentCart?.findIndex(i => i.id == id && i.color == color && i.size == size)
         newCart[index].quantity += quantity
