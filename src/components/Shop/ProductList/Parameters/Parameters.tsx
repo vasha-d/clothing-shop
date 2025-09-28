@@ -21,7 +21,7 @@ function Parameters({query, setQuery}: ParamPropsType) {
   const paramsRef = useRef<HTMLDivElement>(null)
   function submitPrice (min: number | '', max: number | '') {
     setQuery(prev => {
-      return {...prev, min, max}
+      return {...prev, page: 1, min, max}
     })
     setVisible('none')
   }

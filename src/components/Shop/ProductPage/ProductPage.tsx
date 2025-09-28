@@ -1,4 +1,4 @@
-import {useParams } from "react-router-dom"
+import {useNavigate, useParams } from "react-router-dom"
 import type { FullProductObjType, CartDataType, CartItemType } from "../../../types"
 import styles from './ProductPage.module.css'
 import PickColor from "./PickColor/PickColor"
@@ -32,13 +32,25 @@ function LoadedPage({productObj, setCartData}:
   const [color, setColor] = useState<string>(available_colors[0])
   const [size, setSize] = useState<string>(sizesList[0])
   const [quantity, setQuantity] = useState<number>(1)
-
+  
+  let navigate = useNavigate()
   available_sizes = available_sizes || sizesList
-
+  
+  
   async function clickAddToCart() {
+
+
+    if (!document.cookie) {
+      navigate('/sign-in')
+    }
     const token = readCookie().token
-    const req = postCartItem(id, color, size, quantity, token) 
-    updateInternalCart()
+    const req = await postCartItem(id, color, size, quantity, token) 
+    if (req.status == 401) {
+      navigate('/sign-in')
+    } else if (req.status == 200) {
+      console.log('status 20')
+      updateInternalCart()
+    }
   }
   function updateInternalCart() {
     setCartData(currentCart => {  

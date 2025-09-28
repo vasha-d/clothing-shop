@@ -17,10 +17,10 @@ function Register() {
     handlePassword,
     confirmPassword,
     handleConfirmPassword,
-    submitRegister,
     avatarFile,
     handleFile,
-    removeAvatar
+    removeAvatar,
+    submitRegister,
   } = useValidate()
 
   const [passwordHidden, setPasswordHidden] = useState<Boolean[]>([true, true])

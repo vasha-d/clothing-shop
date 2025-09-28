@@ -35,3 +35,20 @@
   align-items: center;
   gap: 36px;
 }
+
+.priceNote {
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--grey2);
+  padding: 8px 10px;
+  border-radius: 50px;
+  margin-block: 10px;
+}
+
+.closePriceNote {
+  height: 8px;
+  cursor: pointer;
+}

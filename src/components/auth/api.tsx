@@ -18,8 +18,8 @@ export async function postNewAccount (obj: RegistrationObjType) {
     headers: {
       "Accept": "application/json"
     }
-  })
-    return null 
+    })
+    return register
   } catch (error) {
     console.log(error)
     return error as AxiosError
@@ -49,13 +49,17 @@ export async function postSignIn(signInObj: SignInObjType) {
 }
 
 
-
 export function readCookie() {
 
+  if (!document.cookie) {
+    return {error: 401, token: '', email: '', username: '', avatar: ''}
+  }
   const cookie = document.cookie
   const data = cookie.split('=')[1]
   const obj = JSON.parse(decodeURIComponent(data))
   
 
-  return obj as {email: string, username: string, token: string}
+  console.log(obj)
+
+  return obj as {email: string, username: string, token: string, error: string,  avatar: string}
 }

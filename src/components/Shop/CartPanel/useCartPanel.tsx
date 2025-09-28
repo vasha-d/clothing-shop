@@ -4,7 +4,9 @@ import type { CartControlsHookType, CartDataType, CartItemType, useCartPanelType
 import CartPanel from "./CartPanel"
 import { useLocation } from "react-router-dom"
 import { readCookie } from "../../auth/api"
-const token = readCookie().token as string
+
+
+const token = document.cookie && readCookie().token as string
 
 export default function useCartPanel() : useCartPanelType {
   

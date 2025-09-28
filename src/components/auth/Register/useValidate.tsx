@@ -110,7 +110,15 @@ function useValidate() {
     }
     console.log(dataObj)
     const req = await postNewAccount(dataObj)
-    handleBackendError(req)
+    if (req?.status == 200) {
+      postSignIn({
+        email: email.value,
+        password: password.value
+      })
+      navigate('/products')
+    } else {
+      handleBackendError(req)
+    }
   }
 
   return {

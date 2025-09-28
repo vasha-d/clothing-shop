@@ -91,7 +91,7 @@ function useValidate() {
         token: req.data.token
       }
       document.cookie = `user=${encodeURIComponent(JSON.stringify(userObj))}`
-      console.log(document.cookie)
+      console.log(userObj)
       //If Sign In successful, go to shop page
       navigate('/products')
     } else {  

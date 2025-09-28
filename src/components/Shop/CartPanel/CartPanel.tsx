@@ -49,10 +49,8 @@ function LoadedCartPanel ({cartData, setVisible, setCartData, isCheckingOut}: Lo
     }
   }
 
-  //This element is used in both the cart panel and the check out page
-  console.log(cartData, !cartData)
-
   const isCartEmpty = cartData == null || !cartData?.length
+  //This element is used in both the cart panel and the check out page
   return (
     <div onClick={clickCover}className={isCheckingOut? styles.cartWrapper : styles.cover}>
       

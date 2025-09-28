@@ -1,26 +1,35 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import styles from './navbar.module.css'
 import logo from '../../assets/logo.svg'
 import cartIcon from '../../assets/cart.svg'
 import avatarPlaceholder from '../../assets/avatar-placeholder.svg'
 import unregisteredPlaceholder from '../../assets/unregistered-placeholder.svg'
 import type { SetStateAction } from "react"
+import { readCookie } from "../auth/api"
 function Navbar({setVisible} : {setVisible: React.Dispatch<SetStateAction<boolean>>}) { 
 
 
   const {pathname} = useLocation()
-
+  const navigate = useNavigate()
   const isInAuthorizationRoutes = ['/register', '/sign-in'].includes(pathname)
 
   function openCart(){
+
+    let isAuthorized = !!readCookie().email
+
+    if (!isAuthorized) {
+      navigate('/sign-in')
+      return
+    }
     setVisible(true)
   }
+  readCookie()
   const authorizedElement = (
     <>
       <div className={styles.cart} onClick={openCart}>
           <img src={cartIcon} alt="" />
       </div>
-      <img className={styles.avatar} src={avatarPlaceholder} alt="" />
+      <img className={styles.avatar} src={readCookie().avatar || avatarPlaceholder} alt="" />
     </>
   )
   const unauthorizedElement = (

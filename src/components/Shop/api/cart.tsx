@@ -15,11 +15,15 @@ const configObj = (token: string) => {
   }
 }
 export async function getCart(token: string) {
+
+
   const url = api 
-  console.log(url, configObj(token))
-  const req = await axios.get(url, configObj(token))
-  console.log(req.data)
-  return req
+  try {
+    const req = await axios.get(url, configObj(token))
+    return req
+  } catch (error) {
+    return error
+  }
 }
 
 export async function
@@ -28,10 +32,15 @@ postCartItem (id: number, color: string, size: string, quantity: number, token: 
   
   const data = {color:color, size: size, quantity}
 
-  const req = await axios.post(url, data, configObj(token))
+  
+  try {
+    const req = await axios.post(url, data, configObj(token))
+    return {status: 200}
+  } catch (error) {
+    return error
+  }
 
-  console.log(req.data)
-  return req
+
 }
 
 
