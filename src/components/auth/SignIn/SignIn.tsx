@@ -45,7 +45,9 @@ function SignIn() {
               <img onClick={togglePasswordHide} className={styles.togglePasswordHidden} src={showPasswordImg} alt="" />
             </div>
 
-            <button className={styles.submit} onClick={submitSignIn}>SignIn</button>
+            <button className={styles.submit} onClick={submitSignIn}>Log In
+              
+            </button>
 
             <a className={styles.altLink} href="/register">
               Not a memeber?  <span>Register</span>

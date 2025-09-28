@@ -85,8 +85,13 @@ function useValidate() {
     }
     const req = await postSignIn(dataObj)
     if (req.status == 200) {
-      const token = req.data.token 
-      localStorage.setItem('token', token)
+      const token = req.data
+      const userObj = {
+        ...req.data.user,
+        token: req.data.token
+      }
+      document.cookie = `user=${encodeURIComponent(JSON.stringify(userObj))}`
+      console.log(document.cookie)
       //If Sign In successful, go to shop page
       navigate('/products')
     } else {  

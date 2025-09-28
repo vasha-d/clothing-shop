@@ -1,5 +1,5 @@
-import axios from "axios"
-import type { CartDataType, newQuantitiesType, ProductObjType } from "../../../types"
+import axios, { AxiosError } from "axios"
+import type { CartDataType } from "../../../types"
 
 
 
@@ -16,7 +16,7 @@ const configObj = (token: string) => {
 }
 export async function getCart(token: string) {
   const url = api 
-
+  console.log(url, configObj(token))
   const req = await axios.get(url, configObj(token))
   console.log(req.data)
   return req
@@ -61,13 +61,23 @@ export async function deleteCartProduct(id: number, color: string, size: string,
   console.log(req.data)
   return req
 }
-export async function postCheckOut(token: string) {
+export async function postCheckOut(token: string, formData) {
 
   const url = api + `/checkout`
+  const data = {}
 
-  const req = await axios.post(url, configObj(token))
+  Object.entries(formData).forEach(([key, value]) => {
+        data[key] = value.value
+  })
+  
+  try {
+    console.log(data)
+    const response = await axios.post(url, data, configObj(token))
+    
+    return response
+  } catch (error) {
+    const e = error as AxiosError
+    return error
+  }
 
-  console.log(req)
-
-  return req
 }

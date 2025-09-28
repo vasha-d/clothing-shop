@@ -38,3 +38,9 @@
 .cart:active {
   transform: scale(1.1);
 }
+
+.signIn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -11,7 +11,7 @@ function Shop({cartHook}: {cartHook: useCartPanelType}) {
   return (
     <>
       <Outlet context={loadedHook}></Outlet>
-      {cartElement}
+      {controls.isCheckingOut || cartElement}
     </>
   )
 }

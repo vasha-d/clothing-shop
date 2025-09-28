@@ -89,7 +89,8 @@ export type CartControlsHookType = {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>,
   loading: boolean,
   cartData: CartDataType | null,
-  setCartData: React.Dispatch<React.SetStateAction<CartDataType | null>>
+  setCartData: React.Dispatch<React.SetStateAction<CartDataType | null>>,
+  isCheckingOut: boolean
 }
 
 export type useCartPanelType = {
@@ -99,3 +100,10 @@ export type useCartPanelType = {
 
 
 export type CartDataType = CartItemType[]
+
+export type ValidationObjType = {
+  value: string | number,
+  message: string,
+  valid: boolean,
+  showError: boolean
+}

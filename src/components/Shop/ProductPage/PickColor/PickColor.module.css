@@ -17,6 +17,7 @@
   width: 38px;
   border-radius: 38px;
   border: 1px solid var(--grey2);
+  cursor: pointer;
 }
 
 .colorsList {

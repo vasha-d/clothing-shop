@@ -3,7 +3,7 @@ import { getPage } from "../api/products";
 import type { PageFetchDataType, ProductListQueryType, UseGetPageReturnType } from "../../../types";
 
 const defaultQuery: ProductListQueryType = {
-  page: 4,
+  page: 1,
   min: 0,
   max: '',
   sort: 'created_at'

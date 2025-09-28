@@ -2,8 +2,9 @@ import { useEffect, useState } from "react"
 import { getCart } from "../api/cart"
 import type { CartControlsHookType, CartDataType, CartItemType, useCartPanelType } from "../../../types"
 import CartPanel from "./CartPanel"
-
-const token = localStorage.getItem('token') as string
+import { useLocation } from "react-router-dom"
+import { readCookie } from "../../auth/api"
+const token = readCookie().token as string
 
 export default function useCartPanel() : useCartPanelType {
   
@@ -16,7 +17,10 @@ export default function useCartPanel() : useCartPanelType {
 //Controls for opening, closing  and refreshing cart panel
 function useCartCotrols(): CartControlsHookType {
 
-  const [visible, setVisible] = useState(false)
+  const currentPath = useLocation().pathname
+  const isCheckingOut = currentPath == '/products/check-out'
+
+  const [visible, setVisible] = useState(isCheckingOut) //If user is on checkout page, show cart 
   const [cartData, setCartData] = useState<CartDataType | null>(null)
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -28,7 +32,9 @@ function useCartCotrols(): CartControlsHookType {
     }
     fetchCart()
   }, [])
-  return {visible, setVisible, cartData, setCartData, loading}
+
+  
+  return {visible, setVisible, cartData, setCartData, loading, isCheckingOut}
 }
 
 

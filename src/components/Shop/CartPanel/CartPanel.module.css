@@ -11,7 +11,7 @@
 }
 
 
-.container {
+.panelContainer {
   position: absolute;
   right: 0;
   top: 0;
@@ -43,7 +43,7 @@
   overflow-y:auto;
 }
 
-.checkOut {
+.button {
   padding: 16px 60px; 
   border-radius: 10px;
   background-color: red;
@@ -79,4 +79,20 @@
   color: var(--dark-blue);
   font-weight: 500;
   font-size: 20px;
+}
+
+.normalContainer {
+  display: flex;
+  width: 560px;
+  height: 100%;
+  flex-direction: column;
+  background-color: inherit;
+}
+
+.normalContainer > .itemList {
+  height: 400px;
+}
+
+.cartWrapper {
+  width: min-content;
 }

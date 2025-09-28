@@ -48,3 +48,14 @@ export async function postSignIn(signInObj: SignInObjType) {
 
 }
 
+
+
+export function readCookie() {
+
+  const cookie = document.cookie
+  const data = cookie.split('=')[1]
+  const obj = JSON.parse(decodeURIComponent(data))
+  
+
+  return obj as {email: string, username: string, token: string}
+}

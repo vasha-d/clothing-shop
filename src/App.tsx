@@ -14,7 +14,7 @@ function App() {
   return (
       <>
 
-        <Navbar {...cartHook.controls}></Navbar>
+        <Navbar setVisible={cartHook.controls.setVisible}></Navbar>
 
         <Routes>
           <Route path='/' element={<Navigate to='products' replace/>}></Route>
@@ -24,7 +24,7 @@ function App() {
           <Route path='/products' element={<Shop cartHook={cartHook}></Shop>}>
             <Route path='' element= {<ProductList></ProductList>}></Route>
             <Route path=':id' element={<ProductPage setCartData={cartHook.controls.setCartData}></ProductPage>}></Route>
-            <Route path='check-out' element={<CheckOut></CheckOut>}></Route>
+            <Route path='check-out' element={<CheckOut cartElement={cartHook.cartElement}></CheckOut>}></Route>
           </Route>
         </Routes>
       </>

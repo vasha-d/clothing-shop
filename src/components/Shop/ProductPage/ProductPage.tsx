@@ -10,6 +10,7 @@ import { postCartItem } from "../api/cart"
 import cartImg from '../../../assets/white-cart.svg'
 import Details from "./Details/Details"
 import useGetProduct from "./useGetProduct"
+import { readCookie } from "../../auth/api"
 function toTitleCase(name: string) {
   return name[0].toUpperCase() + name.slice(1)
 }
@@ -23,17 +24,19 @@ function ProductPage({setCartData}:{setCartData: React.Dispatch<React.SetStateAc
   productObj={data as FullProductObjType}></LoadedPage>
 
 }
-
+const sizesList = ['XS', 'S', 'M', 'L', 'XL']
 function LoadedPage({productObj, setCartData}: 
   {productObj: FullProductObjType, setCartData: React.Dispatch<React.SetStateAction<CartDataType>>}) {
 
-  const {available_sizes, available_colors, id} = productObj 
+  let {available_sizes, available_colors, id} = productObj 
   const [color, setColor] = useState<string>(available_colors[0])
-  const [size, setSize] = useState<string>(available_sizes[0])
+  const [size, setSize] = useState<string>(sizesList[0])
   const [quantity, setQuantity] = useState<number>(1)
 
+  available_sizes = available_sizes || sizesList
+
   async function clickAddToCart() {
-    const token = localStorage.getItem('token') as string
+    const token = readCookie().token
     const req = postCartItem(id, color, size, quantity, token) 
     updateInternalCart()
   }
