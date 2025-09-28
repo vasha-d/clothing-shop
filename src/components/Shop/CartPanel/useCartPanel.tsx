@@ -23,6 +23,9 @@ function useCartCotrols(): CartControlsHookType {
   const [visible, setVisible] = useState(isCheckingOut) //If user is on checkout page, show cart 
   const [cartData, setCartData] = useState<CartDataType | null>(null)
   const [loading, setLoading] = useState(true)
+
+
+  
   useEffect(() => {
     async function fetchCart() {
       const req = await getCart(token)
@@ -32,7 +35,7 @@ function useCartCotrols(): CartControlsHookType {
     }
     fetchCart()
   }, [])
-
+  
   
   return {visible, setVisible, cartData, setCartData, loading, isCheckingOut}
 }

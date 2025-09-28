@@ -4,11 +4,12 @@ import { deleteCartProduct, patchCartProduct } from '../../api/cart'
 import styles from './CartItem.module.css'
 
 import  type { CartDataType } from '../../../../types'
+import { readCookie } from '../../../auth/api'
 
 function toTitleCase(s: string) {
   return s[0].toUpperCase()+s.slice(1)
 }
-const token = localStorage.getItem('token')
+const token = readCookie().token
 
 
 function CartItem({itemObj, index, setCartData}: 
@@ -20,6 +21,7 @@ function CartItem({itemObj, index, setCartData}:
 
   function clickPlus() {    
     setCartData(list => {
+      patchCartProduct(id, color, size, quantity+1, token)
       let newItemObj = {...itemObj, quantity: quantity + 1}
       let newCart = [...list]
       newCart[index] = newItemObj 
@@ -29,6 +31,7 @@ function CartItem({itemObj, index, setCartData}:
   function clickMinus() {
     if (quantity == 1) return    
     setCartData(list => {
+      patchCartProduct(id, color, size, quantity-1, token)
       let newItemObj = {...itemObj, quantity: quantity - 1}
       let newCart = [...list]
       newCart[index] = newItemObj 

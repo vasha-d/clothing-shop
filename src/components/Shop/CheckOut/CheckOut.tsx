@@ -1,18 +1,35 @@
+import { useState } from 'react'
 import { readCookie } from '../../auth/api'
 import styles from './checkout.module.css'
+import ConfirmPurchase from './ConfirmPurchase/ConfirmPurchase'
 import ErrorMessage from './ErrorMessage'
 import useValidate from './useValidate'
-
-function CheckOut({cartElement}: {cartElement: React.ReactElement<unknown, string | React.JSXElementConstructor<any>>}) {
+import type { CartDataType, useCartPanelType } from '../../../types'
+type CheckoutProps =   {
+  cartElement: React.ReactElement<unknown, string | React.JSXElementConstructor<any>>, 
+  setCartData: React.Dispatch<React.SetStateAction<CartDataType | null>>
+  isCartEmpty: boolean
+}
+function CheckOut({controls,cartElement}: useCartPanelType) {
 
   console.log(readCookie())
-
+  const {setCartData, cartData, setVisible} = controls
   const {formData, handleChange, submitCheckoutForm} = useValidate()
   const {name, surname, email, zip_code, address} = formData
-
+  const [confirmationVisible, setConfirmationVisible] = useState(false)
   function isValidClass(showError: boolean) {
     return showError ? ' '+styles.invalid : ''
   }
+  const closeModal = () => setConfirmationVisible(false)
+  function clickSubmit() {
+    const onSuccess = () => {
+      setConfirmationVisible(true)
+      setCartData(null)
+    }
+    submitCheckoutForm(onSuccess)
+  }
+
+  const isCartEmpty = cartData == null || !cartData?.length
   return (
     <div className={styles.page}>
       <h1>Checkout</h1>
@@ -56,8 +73,9 @@ function CheckOut({cartElement}: {cartElement: React.ReactElement<unknown, strin
         </div>
 
         {cartElement}
-        <button className='big-button' onClick={submitCheckoutForm} >Pay</button>
+        {isCartEmpty || <button className='big-button' onClick={clickSubmit} >Pay</button>}
       </div>
+      {confirmationVisible  && <ConfirmPurchase closeCart={() => {setVisible(false)}}closeModal={closeModal}></ConfirmPurchase>}
     </div>
   )
 }

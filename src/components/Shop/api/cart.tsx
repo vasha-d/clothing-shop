@@ -34,15 +34,6 @@ postCartItem (id: number, color: string, size: string, quantity: number, token: 
   return req
 }
 
-export async function postNewCartQuantities(newCartObj: CartDataType, token: string | null) {
-
-  newCartObj.forEach(async (item) => {
-    
-    let req = await patchCartProduct(item.id, item.color, item.size, item.quantity, token)
-    console.log(req)
-  })
-
-}
 
 export async function 
 patchCartProduct(id: number, color: string, size: string, quantity: number, token: string | null) {

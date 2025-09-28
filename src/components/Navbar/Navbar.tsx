@@ -34,7 +34,7 @@ function Navbar({setVisible} : {setVisible: React.Dispatch<SetStateAction<boolea
   return (
     <div className={styles.navbar}>
 
-      <Link to='/products' className={styles.logo} >
+      <Link to='/products' onClick={() => {setVisible(false)}}className={styles.logo} >
         <img src={logo} alt="" />  
         <span>
           RedSeam Clothing

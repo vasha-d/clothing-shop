@@ -20,13 +20,13 @@ function ProductPage({setCartData}:{setCartData: React.Dispatch<React.SetStateAc
   const {loading, data} = useGetProduct(id)
   if (loading) return 'Loading...'
   return <LoadedPage 
-  setCartData={setCartData as React.Dispatch<React.SetStateAction<CartDataType>>} 
+  setCartData={setCartData as React.Dispatch<React.SetStateAction<CartDataType | null>>} 
   productObj={data as FullProductObjType}></LoadedPage>
 
 }
 const sizesList = ['XS', 'S', 'M', 'L', 'XL']
 function LoadedPage({productObj, setCartData}: 
-  {productObj: FullProductObjType, setCartData: React.Dispatch<React.SetStateAction<CartDataType>>}) {
+  {productObj: FullProductObjType, setCartData: React.Dispatch<React.SetStateAction<CartDataType | null>>}) {
 
   let {available_sizes, available_colors, id} = productObj 
   const [color, setColor] = useState<string>(available_colors[0])
@@ -42,14 +42,14 @@ function LoadedPage({productObj, setCartData}:
   }
   function updateInternalCart() {
     setCartData(currentCart => {  
-      let isExactItemInCart = currentCart.some(i => {
+      let isExactItemInCart = currentCart?.some(i => {
         return i.id == id && i.size == size && i.color == color
       })
 
-      const newCart = currentCart.map(item => {return {...item}})
+      const newCart = currentCart?.map(item => {return {...item}}) || []
       console.log(isExactItemInCart)
       if (isExactItemInCart) {
-        let index = currentCart.findIndex(i => i.id == id && i.color == color && i.size == size)
+        let index = currentCart?.findIndex(i => i.id == id && i.color == color && i.size == size)
         newCart[index].quantity += quantity
       } else {
         let newItem = {...productObj, quantity, size, color}

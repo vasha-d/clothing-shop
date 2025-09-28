@@ -62,14 +62,14 @@ export default function useValidate() {
       })
     })
   }
-  async function submitCheckoutForm () {
+  async function submitCheckoutForm (onSuccess: () => void) {
     const data = {}
     
 
     const req = await postCheckOut(token, formData)
     console.log(req)
     if (req.status == 200) {
-
+      onSuccess()
     } else if (req.status == 422) {
       let errors = req?.response.data.errors
       resetErrors()

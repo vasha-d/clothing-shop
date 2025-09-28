@@ -24,7 +24,7 @@ function App() {
           <Route path='/products' element={<Shop cartHook={cartHook}></Shop>}>
             <Route path='' element= {<ProductList></ProductList>}></Route>
             <Route path=':id' element={<ProductPage setCartData={cartHook.controls.setCartData}></ProductPage>}></Route>
-            <Route path='check-out' element={<CheckOut cartElement={cartHook.cartElement}></CheckOut>}></Route>
+            <Route path='check-out' element={<CheckOut {...cartHook}></CheckOut>}></Route>
           </Route>
         </Routes>
       </>
