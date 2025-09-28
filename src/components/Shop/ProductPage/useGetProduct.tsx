@@ -20,8 +20,6 @@ export default function useGetProduct(id: number): GetProductHookType {
       const data = req.data as FullProductObjType
       setData(req.data)
       setLoading(false)
-      console.log(data)
-      console.log(loading)
       
     }
 

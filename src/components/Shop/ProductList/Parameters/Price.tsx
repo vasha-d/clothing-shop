@@ -30,8 +30,6 @@ function Price({min, max, submitPrice, visible}: PricePropsType) {
     e.preventDefault()
     submitPrice(newMin, newMax)
   }
-  console.log(min, newMin)
-  console.log(max, newMax)
   return (  
     <div className={styles.price}> 
       <div className={styles.priceHead}>Select price</div>

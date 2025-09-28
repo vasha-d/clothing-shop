@@ -27,11 +27,9 @@ function Sort({sort, submitSort, visible}: SortFilterPropsType) {
   function changeSort (e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const target = e.target as HTMLDivElement
     const newSortVal = target.id as SortType 
-    console.log('setting new', newSortVal)
     setNewSort(newSortVal)
     submitSort(newSortVal)
   }
-  console.log(sort, newSort)
   return (
     <div className={styles.sort}>
       <div className={styles.sortHead}>Sort by</div>

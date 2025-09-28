@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 
 function CheckOut({controls,cartElement}: useCartPanelType) {
 
-  console.log(readCookie()) 
 
   
   const {setCartData, cartData, setVisible} = controls

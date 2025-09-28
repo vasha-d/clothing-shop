@@ -48,7 +48,6 @@ function LoadedPage({productObj, setCartData}:
     if (req.status == 401) {
       navigate('/sign-in')
     } else if (req.status == 200) {
-      console.log('status 20')
       updateInternalCart()
     }
   }
@@ -59,7 +58,7 @@ function LoadedPage({productObj, setCartData}:
       })
 
       const newCart = currentCart?.map(item => {return {...item}}) || []
-      console.log(isExactItemInCart)
+      (isExactItemInCart)
       if (isExactItemInCart) {
         let index = currentCart?.findIndex(i => i.id == id && i.color == color && i.size == size)
         newCart[index].quantity += quantity

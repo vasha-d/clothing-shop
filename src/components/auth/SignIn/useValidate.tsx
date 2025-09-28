@@ -19,7 +19,6 @@ function useValidate() {
 
 
   function hasThreeSymbols(s: string) {
-    console.log(s, s.trim())
     return s.trim().length > 2
   }
 
@@ -53,7 +52,6 @@ function useValidate() {
     const messages = error?.response?.data?.errors
     if (error == null) return;
     if (error.status == 401) {
-      console.log('doing set 401')
       setEmail(e => {
         return {value: e.value, message: 'Invalid Credentials', showError: true, valid: false}
       })

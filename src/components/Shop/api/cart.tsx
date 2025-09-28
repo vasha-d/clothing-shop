@@ -47,9 +47,7 @@ export async function
 patchCartProduct(id: number, color: string, size: string, quantity: number, token: string | null) {
   const url = api + `/products/${id}`
   const data = {quantity, color, size}
-  console.log('running', url, data)
   const req= await axios.patch(url, data, configObj(token))
-  console.log(req.data)
   return req
 }
 
@@ -57,7 +55,6 @@ export async function deleteCartProduct(id: number, color: string, size: string,
   const url = api + `/products/${id}`
   const data = {color, size}
   const req = await axios.delete(url, {...configObj(token), data})
-  console.log(req.data)
   return req
 }
 export async function postCheckOut(token: string, formData) {
@@ -70,7 +67,6 @@ export async function postCheckOut(token: string, formData) {
   })
   
   try {
-    console.log(data)
     const response = await axios.post(url, data, configObj(token))
     
     return response

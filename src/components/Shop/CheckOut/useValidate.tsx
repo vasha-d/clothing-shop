@@ -67,7 +67,6 @@ export default function useValidate() {
     
     const token = readCookie().token
     const req = await postCheckOut(token, formData)
-    console.log(req)
     if (req.status == 200) {
       onSuccess()
     } else if (req.status == 422) {

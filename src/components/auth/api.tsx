@@ -12,7 +12,6 @@ export async function postNewAccount (obj: RegistrationObjType) {
       
     }
   }
-  console.log(data)
   try {
     const register = await axios.post(url, data, {
     headers: {
@@ -21,7 +20,6 @@ export async function postNewAccount (obj: RegistrationObjType) {
     })
     return register
   } catch (error) {
-    console.log(error)
     return error as AxiosError
   }
 
@@ -44,12 +42,11 @@ export async function postSignIn(signInObj: SignInObjType) {
       ...req.data.user,
       token: req.data.token
     }
+    document.cookie = ''
     document.cookie = `user=${encodeURIComponent(JSON.stringify(userObj))}`
-    console.log(userObj)
     
     return req   
   } catch (error) {
-    console.log(error)
     return error as AxiosError
   }
 

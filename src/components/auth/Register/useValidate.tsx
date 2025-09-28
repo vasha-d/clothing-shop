@@ -29,19 +29,15 @@ function useValidate() {
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.target as HTMLInputElement
     const file = target.files?.[0] as File
-    console.log('changed')
-    console.log(target.files)
     const url = URL.createObjectURL(file)
     setAvatarFile(old => {
       return {...old, url, file}
     }
     )
     e.target.value = ''
-    console.log(e.target.value, e.target.files)
   }
 
   function hasThreeSymbols(s: string) {
-    console.log(s, s.trim())
     return s.trim().length > 2
   }
 
@@ -130,7 +126,6 @@ function useValidate() {
       password_confirmation: confirmPassword.value,
       avatar: avatarFile.file || null
     }
-    console.log(dataObj)
     const req = await postNewAccount(dataObj)
     if (req?.status == 200) {
       await postSignIn({
@@ -141,7 +136,6 @@ function useValidate() {
     } else {
       handleBackendError(req)
     }
-    console.log(req)
 
   }
 
