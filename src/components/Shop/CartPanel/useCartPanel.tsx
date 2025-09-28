@@ -15,6 +15,9 @@ export default function useCartPanel() : useCartPanelType {
 }
 
 
+
+
+
 //Controls for opening, closing  and refreshing cart panel
 function useCartCotrols(): CartControlsHookType {
 
