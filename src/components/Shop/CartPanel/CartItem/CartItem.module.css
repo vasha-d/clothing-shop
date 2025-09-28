@@ -43,18 +43,20 @@
   font-size: 14px;
   justify-content: center;
   align-items: center;
+  cursor: default;
 }
 
-.disabled {
-  color: var(--grey2);
-}
+
 
 .changeQuantity {
   font-size: 18px;
   cursor: pointer;
   scale: 1.1;
 }
-
+.disabled {
+  color: var(--grey2);
+  cursor: default;
+}
 .changeQuantity:active {
   scale: 1.25;
 }

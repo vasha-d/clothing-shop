@@ -32,7 +32,6 @@ function Navbar({setVisible} : {setVisible: React.Dispatch<SetStateAction<boolea
       <img className={styles.avatar} src={readCookie().avatar || avatarPlaceholder} alt="" />
     </>
   )
-  console.log(readCookie())
   const unauthorizedElement = (
     
       <Link to={'/sign-in'} className={styles.signIn} onClick={openCart}>

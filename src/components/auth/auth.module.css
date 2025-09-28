@@ -50,17 +50,32 @@
 .imgForm {
   display: flex;
   align-items: center;
-  gap: 20px;
   color: var(--dark-blue2);
   margin-block: 50px 40px;
+  position: relative;
+
 } 
 .imgLabel {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
+
+
 .imgLabel input {
   padding: 0;
   width: 0 ;
   height: 0;
+}
+
+.avatarError {
+  color: red;
+  position: absolute;
+  top: 110%;
+  left: 10px;
+  font-size: 14px;
 }
 
 .inputWrapper {
@@ -131,3 +146,5 @@
 .togglePasswordHidden:active {
   scale: 1.04;
 }
+
+

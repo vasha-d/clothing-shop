@@ -68,7 +68,5 @@ export function readCookie() {
   const obj = JSON.parse(decodeURIComponent(data))
   
 
-  console.log(obj)
-
   return obj as {email: string, username: string, token: string, error: string,  avatar: string}
 }

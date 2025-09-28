@@ -38,7 +38,6 @@ function Register() {
       return [h[0], !h[1]]
     })
   }
-
   return (
     <div className={styles.page}>
       <div className={styles.formContainer}>
@@ -48,12 +47,15 @@ function Register() {
           <form className={styles.formList}>
 
             <div className={styles.imgForm}>
-              <img className={styles.avatar} src={avatarFile.url || avatarPlaceholder} />
               <label className={styles.imgLabel}>
+              <img className={styles.avatar} src={avatarFile.url || avatarPlaceholder} />
                 Upload New
                 <input onChange={handleFile} type="file" accept='image/*' />
               </label>
               <div onClick={removeAvatar} className={styles.removeAvatar}>Remove</div>
+              <div className={styles.avatarError}>
+                {avatarFile.message}
+              </div>
             </div>
 
             <div className={styles.inputWrapper + isValidClass(username.showError)}>

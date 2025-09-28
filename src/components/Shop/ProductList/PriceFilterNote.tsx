@@ -26,6 +26,7 @@ function PriceFilterNote({query, setQuery}:  {query: ProductListQueryType, setQu
       <img onClick={resetPriceFIlter} className={styles.closePriceNote} src={closeImg} alt="" />
     </div>
   ) 
+  
 }
 
 export default PriceFilterNote
