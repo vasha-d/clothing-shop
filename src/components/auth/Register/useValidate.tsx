@@ -111,7 +111,7 @@ function useValidate() {
     console.log(dataObj)
     const req = await postNewAccount(dataObj)
     if (req?.status == 200) {
-      postSignIn({
+      const signin = await postSignIn({
         email: email.value,
         password: password.value
       })

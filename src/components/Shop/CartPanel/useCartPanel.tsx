@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom"
 import { readCookie } from "../../auth/api"
 
 
-const token = document.cookie && readCookie().token as string
 
 export default function useCartPanel() : useCartPanelType {
   
@@ -30,6 +29,7 @@ function useCartCotrols(): CartControlsHookType {
   
   useEffect(() => {
     async function fetchCart() {
+      const token = readCookie().token
       const req = await getCart(token)
       const data = req.data as CartItemType[]
       setCartData(data)

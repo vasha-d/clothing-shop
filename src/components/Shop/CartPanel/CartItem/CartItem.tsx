@@ -9,7 +9,6 @@ import { readCookie } from '../../../auth/api'
 function toTitleCase(s: string) {
   return s[0].toUpperCase()+s.slice(1)
 }
-const token = readCookie().token
 
 
 function CartItem({itemObj, index, setCartData}: 
@@ -18,7 +17,7 @@ function CartItem({itemObj, index, setCartData}:
   
   const {id, color, size, quantity} = itemObj
   const minusClassName = quantity == 1 ? ' '+styles.disabled : ''
-
+  const token = readCookie().token
   function clickPlus() {    
     setCartData(list => {
       patchCartProduct(id, color, size, quantity+1, token)

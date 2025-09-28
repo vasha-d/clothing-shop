@@ -7,9 +7,7 @@ import Pricing from "./Pricing"
 import PanelHead from "./PanelHead"
 import { readCookie } from "../../auth/api"
 import EmptyCart from "./EmptyCart/EmptyCart"
-const {token, email} = readCookie()
 
-console.log(token, email)
 type LoadedPanelProps = CartControlsHookType & {
     cartData: CartDataType |  null,
     setCartData: React.Dispatch<React.SetStateAction<CartDataType>>,

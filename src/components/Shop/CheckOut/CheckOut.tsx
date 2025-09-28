@@ -5,6 +5,7 @@ import ConfirmPurchase from './ConfirmPurchase/ConfirmPurchase'
 import ErrorMessage from './ErrorMessage'
 import useValidate from './useValidate'
 import type { CartDataType, useCartPanelType } from '../../../types'
+import { useNavigate } from 'react-router-dom'
 type CheckoutProps =   {
   cartElement: React.ReactElement<unknown, string | React.JSXElementConstructor<any>>, 
   setCartData: React.Dispatch<React.SetStateAction<CartDataType | null>>
@@ -12,11 +13,15 @@ type CheckoutProps =   {
 }
 function CheckOut({controls,cartElement}: useCartPanelType) {
 
-  console.log(readCookie())
+  console.log(readCookie()) 
+
+  
   const {setCartData, cartData, setVisible} = controls
   const {formData, handleChange, submitCheckoutForm} = useValidate()
   const {name, surname, email, zip_code, address} = formData
   const [confirmationVisible, setConfirmationVisible] = useState(false)
+  const navigate = useNavigate()
+  if (!readCookie().email) {navigate('/sign-in')}
   function isValidClass(showError: boolean) {
     return showError ? ' '+styles.invalid : ''
   }

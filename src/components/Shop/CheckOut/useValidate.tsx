@@ -2,6 +2,7 @@ import { useState } from "react"
 import { readCookie } from "../../auth/api"
 import { postCheckOut } from "../api/cart"
 import type { ValidationObjType } from "../../../types"
+import { useNavigate } from "react-router-dom"
 
 type FormDataObjType = {
   name:  ValidationObjType,
@@ -19,15 +20,14 @@ const defaultValidationObj: ValidationObjType= {
 const defaultDataObjType: FormDataObjType = {
   name: {...defaultValidationObj},
   surname: {...defaultValidationObj},
-  email: {...defaultValidationObj, value: readCookie().email},
+  email: {...defaultValidationObj},
   address: {...defaultValidationObj},
   zip_code: {...defaultValidationObj}
 }
-const token = readCookie().token
 export default function useValidate() {
 
-  const [formData, setFormData] = useState<FormDataObjType>(defaultDataObjType)
-  
+  const [formData, setFormData] = useState<FormDataObjType>({...defaultDataObjType, email: {...defaultDataObjType, value: readCookie().email}})
+  const navigate = useNavigate()
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
 
     let newValue = e.target.value
@@ -65,7 +65,7 @@ export default function useValidate() {
   async function submitCheckoutForm (onSuccess: () => void) {
     const data = {}
     
-
+    const token = readCookie().token
     const req = await postCheckOut(token, formData)
     console.log(req)
     if (req.status == 200) {
@@ -74,6 +74,8 @@ export default function useValidate() {
       let errors = req?.response.data.errors
       resetErrors()
       handleBackendErrors(errors)
+    } else if (req.status == 401) {
+      navigate('/sign-in')
     }
      
   }

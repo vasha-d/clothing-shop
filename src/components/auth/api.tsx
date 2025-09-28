@@ -34,12 +34,21 @@ export async function postSignIn(signInObj: SignInObjType) {
   data.append('email',signInObj.email)
   data.append('password',signInObj.password)
   try {
-    const signIn = await axios.post(url, signInObj, {
+    const req = await axios.post(url, signInObj, {
       headers: {
         "Accept": 'application/json'
       } 
     })
-    return signIn   
+
+    const token = req.data
+      const userObj = {
+        ...req.data.user,
+        token: req.data.token
+      }
+    document.cookie = `user=${encodeURIComponent(JSON.stringify(userObj))}`
+    console.log(userObj)
+    
+    return req   
   } catch (error) {
     console.log(error)
     return error as AxiosError
